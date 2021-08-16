@@ -68,9 +68,8 @@ p.PNAME,p.PNUMBER;
 SELECT p.PNUMBER,p.PNAME,count(e.SSN) FROM WORK_IN w LEFT OUTER JOIN PROJECT p on
 w.PNO=p.PNUMBER LEFT OUTER JOIN EMPLOYEE e on w.ESSN=e.SSN GROUP BY
 p.PNAME,p.PNUMBER HAVING count(e.SSN) > 2;
-SELECT p.PNUMBER,p.PNAME,d.DNUMBER,count(e.ssn) FROM PROJECT p LEFT OUTER JOIN
-DEPARTMENT d on d.DNUMBER=p.DNUM LEFT OUTER JOIN EMPLOYEE e on e.DNO=p.DNUM
-GROUP BY p.PNAME,p.PNUMBER,d.DNUMBER HAVING d.DNUMBER=5;
+SELECT d.dname,d.dnumber,e.ssn,e.ename,e.design,e.doj,e.salary FROM department d,employee e WHERE  (SELECT COUNT(*) FROM employee e WHERE e.dno = d.dnumber AND e.salary> 40000) > 4 AND 
+e.dno=d.dnumber GROUP BY d.dname,d.dnumber,e.ssn,e.ename,e.design,e.doj,e.salary;
 create VIEW emp_dept_view as select  * from EMPLOYEE NATURAL JOIN department;
 CREATE SYNONYM FROM EMP_dept_view;
 SELECT * FROM EMP_DEPT;
